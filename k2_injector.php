@@ -20,12 +20,30 @@ class plgSystemK2_injector extends JPlugin
 	 */
 	protected $autoloadLanguage = true;
 
+	/**
+	 * Constructor.
+	 *
+	 * @param   object &$subject The object to observe
+	 * @param   array  $config   An optional associative array of configuration settings.
+	 *
+	 * @since   0.1
+	 */
+	public function __construct(&$subject, $config)
+	{
+		parent::__construct($subject, $config);
+
+		$this->app = JFactory::getApplication();
+		$this->db  = JFactory::getDbo();
+
+	}
+
+	/**
+	 * @return bool
+	 */
 	function onAfterRender()
 	{
 
-		$app = JFactory::getApplication();
-
-		if ($app->isAdmin())
+		if ($this->app->isAdmin())
 		{
 			return true;
 		}
@@ -33,12 +51,41 @@ class plgSystemK2_injector extends JPlugin
 		$buffer = JResponse::getBody();
 
 		// Match title tag
-		preg_match('/{k2item ([0-9]*)}/i', $buffer, $matches);
+		$buffer = preg_replace_callback(
+			'/{k2item ([0-9]*)}/i',
+			function ($matches)
+			{
+				include_once 'components/com_k2/models/item.php';
 
-		if (array_key_exists('1', $matches))
-		{
-			$buffer = print_r($matches[1], true) . $buffer;
-		}
+				$K2ModelItem = new K2ModelItem();
+
+				// K2ModelItem->getData() looks for ID parameter
+				JRequest::setVar('id', $matches[1]);
+
+				$itemData = $K2ModelItem->getData();
+				$itemTags = $K2ModelItem->getItemTags($matches[1]);
+				$itemExtraFields =  $K2ModelItem->getItemExtraFields($itemData->extra_fields, $itemData);
+
+				die('<pre>' . print_r($itemExtraFields, true) . '</pre>');
+
+				$db    = JFactory::getDbo();
+				$query = $db->getQuery(true);
+				$query
+					->select($db->quoteName(array('title', 'introtext', 'fulltext')))
+					->from($db->quoteName('#__k2_items'))
+					->where($db->quoteName('id') . ' = ' . $db->quote($matches[1]) . ' AND ' . $db->quoteName('trash') . ' = ' . $db->quote('0'));
+
+				$db->setQuery($query);
+
+				$result = $db->loadObject();
+
+				$return = '<h2>' . $result->title . '</h2>';
+				$return .= '<p>' . $result->introtext . '</p>';
+
+				return $return;
+			},
+			$buffer
+		);
 
 		JResponse::setBody($buffer);
 
