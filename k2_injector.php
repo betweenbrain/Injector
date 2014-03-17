@@ -50,38 +50,35 @@ class plgSystemK2_injector extends JPlugin
 
 		$buffer = JResponse::getBody();
 
-		// Match title tag
-		$buffer = preg_replace_callback(
-			'/{k2item ([0-9]*)}/i',
-			function ($matches)
-			{
-				include_once 'components/com_k2/models/item.php';
+		preg_match_all('/{k2item ([0-9]*)\s?([a-zA-Z]*)?}/i', $buffer, $matches, PREG_SET_ORDER);
 
-				$K2ModelItem = new K2ModelItem();
-
-				// K2ModelItem->getData() looks for ID parameter
-				JRequest::setVar('id', $matches[1]);
-
-				$item = $K2ModelItem->getData();
-				// Attached extra fields to $item
-				$K2ModelItem->getItemExtraFields($item->extra_fields, $item);
-
-				//$itemTags        = $K2ModelItem->getItemTags($matches[1]);
-
-				//die('<pre>' . print_r($item, true) . '</pre>');
-
-				ob_start();
-				include_once 'tmpl/default.php';
-
-				return ob_get_clean();
-
-			},
-			$buffer
-		);
+		foreach ($matches as $match)
+		{
+			$buffer = str_replace($match[0], $this->replaceMatch($match[1]), $buffer);
+		}
 
 		JResponse::setBody($buffer);
 
 		return true;
 
+	}
+
+	private function replaceMatch($id, $template = null)
+	{
+		include_once 'components/com_k2/models/item.php';
+
+		$K2ModelItem = new K2ModelItem();
+
+		// K2ModelItem->getData() looks for ID parameter
+		JRequest::setVar('id', $id);
+
+		$item = $K2ModelItem->getData();
+		// Attached extra fields to $item
+		$K2ModelItem->getItemExtraFields($item->extra_fields, $item);
+
+		ob_start();
+		include dirname(__FILE__) . '/tmpl/default.php';
+
+		return ob_get_clean();
 	}
 }
