@@ -54,7 +54,7 @@ class plgSystemK2_injector extends JPlugin
 
 		foreach ($matches as $match)
 		{
-			$buffer = str_replace($match[0], $this->replaceMatch($match[1]), $buffer);
+			$buffer = str_replace($match[0], $this->replaceMatch($match[1], $match[2]), $buffer);
 		}
 
 		JResponse::setBody($buffer);
@@ -77,7 +77,14 @@ class plgSystemK2_injector extends JPlugin
 		$K2ModelItem->getItemExtraFields($item->extra_fields, $item);
 
 		ob_start();
-		include dirname(__FILE__) . '/tmpl/default.php';
+		if ($template)
+		{
+			include JURI::base( true ) . '/templates/' . $this->app->getTemplate() . '/html/plg_k2_injector/' . $template . '/default.php';
+		}
+		else
+		{
+			include dirname(__FILE__) . '/tmpl/default.php';
+		}
 
 		return ob_get_clean();
 	}
