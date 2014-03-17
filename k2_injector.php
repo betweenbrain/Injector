@@ -77,9 +77,11 @@ class plgSystemK2_injector extends JPlugin
 		$K2ModelItem->getItemExtraFields($item->extra_fields, $item);
 
 		ob_start();
-		if ($template)
+		if ($template && file_exists(
+				$override = JPATH_BASE . '/templates/' . $this->app->getTemplate() . '/html/plg_k2_injector/' . $template . '/default.php')
+		)
 		{
-			include JURI::base(true) . '/templates/' . $this->app->getTemplate() . '/html/plg_k2_injector/' . $template . '/default.php';
+			include $override;
 		}
 		else
 		{
