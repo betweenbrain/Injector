@@ -79,7 +79,7 @@ class plgSystemK2_injector extends JPlugin
 		ob_start();
 		if ($template)
 		{
-			include JURI::base( true ) . '/templates/' . $this->app->getTemplate() . '/html/plg_k2_injector/' . $template . '/default.php';
+			include JURI::base(true) . '/templates/' . $this->app->getTemplate() . '/html/plg_k2_injector/' . $template . '/default.php';
 		}
 		else
 		{
