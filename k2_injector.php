@@ -62,27 +62,19 @@ class plgSystemK2_injector extends JPlugin
 				// K2ModelItem->getData() looks for ID parameter
 				JRequest::setVar('id', $matches[1]);
 
-				$itemData = $K2ModelItem->getData();
-				$itemTags = $K2ModelItem->getItemTags($matches[1]);
-				$itemExtraFields =  $K2ModelItem->getItemExtraFields($itemData->extra_fields, $itemData);
+				$item = $K2ModelItem->getData();
+				// Attached extra fields to $item
+				$K2ModelItem->getItemExtraFields($item->extra_fields, $item);
 
-				die('<pre>' . print_r($itemExtraFields, true) . '</pre>');
+				//$itemTags        = $K2ModelItem->getItemTags($matches[1]);
 
-				$db    = JFactory::getDbo();
-				$query = $db->getQuery(true);
-				$query
-					->select($db->quoteName(array('title', 'introtext', 'fulltext')))
-					->from($db->quoteName('#__k2_items'))
-					->where($db->quoteName('id') . ' = ' . $db->quote($matches[1]) . ' AND ' . $db->quoteName('trash') . ' = ' . $db->quote('0'));
+				//die('<pre>' . print_r($item, true) . '</pre>');
 
-				$db->setQuery($query);
+				ob_start();
+				include_once 'tmpl/default.php';
 
-				$result = $db->loadObject();
+				return ob_get_clean();
 
-				$return = '<h2>' . $result->title . '</h2>';
-				$return .= '<p>' . $result->introtext . '</p>';
-
-				return $return;
 			},
 			$buffer
 		);
