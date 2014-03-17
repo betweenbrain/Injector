@@ -63,23 +63,32 @@ class plgSystemK2_injector extends JPlugin
 
 	}
 
+	/**
+	 * Retrieves and renders the matched ID number given the designated template
+	 *
+	 * @param      $id
+	 * @param null $template
+	 *
+	 * @return string
+	 */
 	private function replaceMatch($id, $template = null)
 	{
 		include_once 'components/com_k2/models/item.php';
 
-		$K2ModelItem = new K2ModelItem();
+		$K2ModelItem = new K2ModelItem;
 
 		// K2ModelItem->getData() looks for ID parameter
 		JRequest::setVar('id', $id);
 
 		$item = $K2ModelItem->getData();
+
 		// Attached extra fields to $item
 		$K2ModelItem->getItemExtraFields($item->extra_fields, $item);
 
 		ob_start();
+
 		if ($template && file_exists(
-				$override = JPATH_BASE . '/templates/' . $this->app->getTemplate() . '/html/plg_k2_injector/' . $template . '/default.php')
-		)
+				$override = JPATH_BASE . '/templates/' . $this->app->getTemplate() . '/html/plg_k2_injector/' . $template . '/default.php'))
 		{
 			include $override;
 		}
