@@ -7,15 +7,15 @@
 	<creationDate>March 12, 2014</creationDate>
 	<description>PLG_SYSTEM_K2_INJECTOR_DESC</description>
 	<license>GNU/GPL v2 or later</license>
-	<name>plg_k2_injector</name>
+	<name>plg_joomla_injector</name>
 	<version>0.1</version>
 
 	<files>
-		<filename plugin="k2_injector">k2_injector.php</filename>
+		<filename plugin="joomla_injector">joomla_injector.php</filename>
 	</files>
 
 	<languages folder="languages">
-		<language tag="en-GB">en-GB/en-GB.plg_system_k2_injector.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_system_joomla_injector.ini</language>
 	</languages>
 
 </extension>
