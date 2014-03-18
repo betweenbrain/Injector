@@ -75,8 +75,16 @@ class plgSystemK2_injector extends JPlugin
 	{
 		switch ($component)
 		{
+			case('content'):
+				require_once JPATH_ROOT . '/components/com_content/models/article.php';
+
+				$ContentModelArticle = new ContentModelArticle;
+				$item                = $ContentModelArticle->getItem($id);
+
+				break;
+
 			case('k2'):
-				include_once 'components/com_k2/models/item.php';
+				require_once JPATH_ROOT . '/components/com_k2/models/item.php';
 
 				$K2ModelItem = new K2ModelItem;
 
@@ -93,7 +101,8 @@ class plgSystemK2_injector extends JPlugin
 		ob_start();
 
 		if ($template && file_exists(
-				$override = JPATH_BASE . '/templates/' . $this->app->getTemplate() . '/html/plg_k2_injector/' . $template . '/default.php'))
+				$override = JPATH_BASE . '/templates/' . $this->app->getTemplate() . '/html/plg_k2_injector/' . $template . '/default.php')
+		)
 		{
 			include $override;
 		}
