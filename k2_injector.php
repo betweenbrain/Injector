@@ -50,11 +50,11 @@ class plgSystemK2_injector extends JPlugin
 
 		$buffer = JResponse::getBody();
 
-		preg_match_all('/{k2item ([0-9]*)\s?([a-zA-Z]*)?}/i', $buffer, $matches, PREG_SET_ORDER);
+		preg_match_all('/{([a-zA-Z0-9_-]*)Item ([0-9]*)\s?([a-zA-Z]*)?}/i', $buffer, $matches, PREG_SET_ORDER);
 
 		foreach ($matches as $match)
 		{
-			$buffer = str_replace($match[0], $this->replaceMatch($match[1], $match[2]), $buffer);
+			$buffer = str_replace($match[0], $this->replaceMatch($match[1], $match[2], $match[3]), $buffer);
 		}
 
 		JResponse::setBody($buffer);
@@ -71,19 +71,24 @@ class plgSystemK2_injector extends JPlugin
 	 *
 	 * @return string
 	 */
-	private function replaceMatch($id, $template = null)
+	private function replaceMatch($component, $id, $template = null)
 	{
-		include_once 'components/com_k2/models/item.php';
+		switch ($component)
+		{
+			case('k2'):
+				include_once 'components/com_k2/models/item.php';
 
-		$K2ModelItem = new K2ModelItem;
+				$K2ModelItem = new K2ModelItem;
 
-		// K2ModelItem->getData() looks for ID parameter
-		JRequest::setVar('id', $id);
+				// K2ModelItem->getData() looks for ID parameter
+				JRequest::setVar('id', $id);
 
-		$item = $K2ModelItem->getData();
+				$item = $K2ModelItem->getData();
 
-		// Attached extra fields to $item
-		$K2ModelItem->getItemExtraFields($item->extra_fields, $item);
+				// Attached extra fields to $item
+				$K2ModelItem->getItemExtraFields($item->extra_fields, $item);
+				break;
+		}
 
 		ob_start();
 
