@@ -12,6 +12,7 @@
 
 	<files>
 		<filename plugin="joomla_injector">joomla_injector.php</filename>
+		<folder>tmpl</folder>
 	</files>
 
 	<languages folder="languages">
