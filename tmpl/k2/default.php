@@ -11,7 +11,11 @@
 
 ?>
 <h1><?php echo $item->title ?></h1>
-<p><?php echo $item->introtext?></p>
-<?php foreach($item->extraFields as $extraField){
-	echo $extraField->name . ': '.$extraField->value;
+<p><?php echo $item->introtext ?></p>
+<?php if (isset($item->extraFields))
+{
+	foreach ($item->extraFields as $extraField)
+	{
+		echo $extraField->name . ': ' . $extraField->value;
+	}
 }

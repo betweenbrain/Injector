@@ -101,14 +101,14 @@ class plgSystemJoomla_injector extends JPlugin
 		ob_start();
 
 		if ($template && file_exists(
-				$override = JPATH_BASE . '/templates/' . $this->app->getTemplate() . '/html/plg_joomla_injector/' . $template . '/default.php')
+				$override = JPATH_BASE . '/templates/' . $this->app->getTemplate() . '/html/plg_joomla_injector/' . $component . '/' . $template . '/default.php')
 		)
 		{
 			include $override;
 		}
 		else
 		{
-			include dirname(__FILE__) . '/tmpl/default.php';
+			include dirname(__FILE__) . '/tmpl/' . $component . '/default.php';
 		}
 
 		return ob_get_clean();
