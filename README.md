@@ -19,3 +19,6 @@ A simple, multi-purpose set of plugins to easily inject Joomla articles and K2 c
  `[template]` the name of your custom template.
 
  For example, when using the shortcode of `{k2-item 42 foo}` Injector will load the template located at `/templates/[current template]/html/plg_joomla_injector/k2/foo/default.php`
+
+ ### Creating a template
+ Use the provided base templates located at `/plugins/system/joomla_injector/tmpl`
