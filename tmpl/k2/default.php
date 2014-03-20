@@ -64,7 +64,6 @@ K2HelperUtilities::setDefaultImage($item, $view);
 				<span class="itemImageCredits"><?php echo $item->image_credits; ?></span>
 			<?php endif; ?>
 
-			<div class="clr"></div>
 		</div>
 	<?php endif; ?>
 
@@ -88,7 +87,7 @@ K2HelperUtilities::setDefaultImage($item, $view);
 		</div>
 	<?php endif; ?>
 
-	<div class="clr"></div>
+
 
 	<?php if (count($item->extra_fields)): ?>
 		<!-- Item extra fields -->
@@ -108,7 +107,7 @@ K2HelperUtilities::setDefaultImage($item, $view);
 					<?php endif; ?>
 				<?php endforeach; ?>
 			</ul>
-			<div class="clr"></div>
+
 		</div>
 	<?php endif; ?>
 
@@ -131,11 +130,9 @@ K2HelperUtilities::setDefaultImage($item, $view);
 			</span>
 			<?php endif; ?>
 
-			<div class="clr"></div>
 		</div>
 	<?php endif; ?>
 
-	<div class="clr"></div>
 </div>
 
 <?php if (!empty($item->params->itemTwitterButton) || !empty($item->params->itemFacebookButton) || !empty($item->params->itemGooglePlusOneButton)) : ?>
@@ -188,7 +185,6 @@ K2HelperUtilities::setDefaultImage($item, $view);
 			</div>
 		<?php endif; ?>
 
-		<div class="clr"></div>
 	</div>
 <?php endif; ?>
 
@@ -212,7 +208,7 @@ K2HelperUtilities::setDefaultImage($item, $view);
 						<li><a href="<?php echo $tag->link; ?>"><?php echo $tag->name; ?></a></li>
 					<?php endforeach; ?>
 				</ul>
-				<div class="clr"></div>
+
 			</div>
 		<?php endif; ?>
 
@@ -233,7 +229,6 @@ K2HelperUtilities::setDefaultImage($item, $view);
 			</div>
 		<?php endif; ?>
 
-		<div class="clr"></div>
 	</div>
 <?php endif; ?>
 
@@ -263,13 +258,13 @@ K2HelperUtilities::setDefaultImage($item, $view);
 				<span class="itemAuthorEmail"><?php echo JText::_('K2_EMAIL'); ?> <?php echo JHTML::_('Email.cloak', $item->author->email); ?></span>
 			<?php endif; ?>
 
-			<div class="clr"></div>
+
 
 			<!-- K2 Plugins: K2UserDisplay -->
 			<?php echo $item->event->K2UserDisplay; ?>
 
 		</div>
-		<div class="clr"></div>
+
 	</div>
 <?php endif; ?>
 
@@ -284,7 +279,7 @@ K2HelperUtilities::setDefaultImage($item, $view);
 				</li>
 			<?php endforeach; ?>
 		</ul>
-		<div class="clr"></div>
+
 	</div>
 <?php endif; ?>
 
@@ -350,11 +345,11 @@ If you add:
 			<?php endforeach; ?>
 			<li class="clr"></li>
 		</ul>
-		<div class="clr"></div>
+
 	</div>
 <?php endif; ?>
 
-<div class="clr"></div>
+
 
 <?php if (!empty($item->params->itemVideo) && !empty($item->video)): ?>
 	<!-- Item video -->
@@ -379,7 +374,6 @@ If you add:
 			<span class="itemVideoCredits"><?php echo $item->video_credits; ?></span>
 		<?php endif; ?>
 
-		<div class="clr"></div>
 	</div>
 <?php endif; ?>
 
@@ -435,19 +429,16 @@ If you add:
 			<h3 class="itemCommentsCounter">
 				<span><?php echo $item->numOfComments; ?></span> <?php echo ($item->numOfComments > 1) ? JText::_('K2_COMMENTS') : JText::_('K2_COMMENT'); ?>
 			</h3>
-
 			<ul class="itemCommentsList">
 				<?php foreach ($item->comments as $key => $comment): ?>
 					<li class="<?php echo ($key % 2) ? "odd" : "even";
 					echo (!$item->created_by_alias && $comment->userID == $item->created_by) ? " authorResponse" : "";
 					echo ($comment->published) ? '' : ' unpublishedComment'; ?>">
-
 	    	<span class="commentLink">
 		    	<a href="<?php echo $item->link; ?>#comment<?php echo $comment->id; ?>" name="comment<?php echo $comment->id; ?>" id="comment<?php echo $comment->id; ?>">
 				    <?php echo JText::_('K2_COMMENT_LINK'); ?>
 			    </a>
 		    </span>
-
 						<?php if ($comment->userImage): ?>
 							<img src="<?php echo $comment->userImage; ?>" alt="<?php echo JFilterOutput::cleanText($comment->userName); ?>" width="<?php echo !empty($item->params->commenterImgWidth); ?>" />
 						<?php endif; ?>
@@ -455,7 +446,6 @@ If you add:
 						<span class="commentDate">
 		    	<?php echo JHTML::_('date', $comment->commentDate, JText::_('K2_DATE_FORMAT_LC2')); ?>
 		    </span>
-
 		    <span class="commentAuthorName">
 			    <?php echo JText::_('K2_POSTED_BY'); ?>
 			    <?php if (!empty($comment->userLink)): ?>
@@ -466,7 +456,6 @@ If you add:
 				    <?php echo $comment->userName; ?>
 			    <?php endif; ?>
 		    </span>
-
 						<p><?php echo $comment->commentText; ?></p>
 
 						<?php if ($this->inlineCommentsModeration || ($comment->published && ($this->params->get('commentsReporting') == '1' || ($this->params->get('commentsReporting') == '2' && !$this->user->guest)))): ?>
@@ -475,6 +464,7 @@ If you add:
 						<?php if (!$comment->published): ?>
 							<a class="commentApproveLink" href="<?php echo JRoute::_('index.php?option=com_k2&view=comments&task=publish&commentID=' . $comment->id . '&format=raw') ?>"><?php echo JText::_('K2_APPROVE') ?></a>
 						<?php endif; ?>
+
 
 						<a class="commentRemoveLink" href="<?php echo JRoute::_('index.php?option=com_k2&view=comments&task=remove&commentID=' . $comment->id . '&format=raw') ?>"><?php echo JText::_('K2_REMOVE') ?></a>
 					<?php endif; ?>
@@ -488,8 +478,6 @@ If you add:
 
 				</span>
 						<?php endif; ?>
-
-						<div class="clr"></div>
 					</li>
 				<?php endforeach; ?>
 			</ul>
