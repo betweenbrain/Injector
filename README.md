@@ -25,3 +25,7 @@ For example, when using the shortcode of `{k2-item 42 foo}` Injector will load t
 ### Creating a template
 
 Use the provided base templates located at `/plugins/system/joomla_injector/tmpl`
+
+## Requirements
+* Joomla 3.2 or later
+* K2 v2.6.8 or later
