@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.2" type="package" method="upgrade">
+	<author>Matt Thomas</author>
+	<authorEmail>matt@betweenbrain.com</authorEmail>
+	<authorUrl>http://betweenbrain.com</authorUrl>
+	<copyright>(C) 2014 Matt Thomas. All rights reserved.</copyright>
+	<creationDate>March 12, 2014</creationDate>
+	<description>Joomla Injector</description>
+	<license>GNU/GPL v2 or later</license>
+	<name>Joomla Injector Package</name>
+	<packagename>joomla_injector</packagename>
+	<version>0.1-alpha</version>
+
+	<files>
+		<file type="plugin" id="joomla_injector" group="system">Joomla-Injector-content_v0.1-alpha.zip</file>
+		<file type="plugin" id="k2_injector" group="editors-xtd">Joomla-Injector-k2_v0.1-alpha.zip</file>
+		<file type="plugin" id="content_injector" group="editors-xtd">Joomla-Injector-system_v0.1-alpha.zip</file>
+	</files>
+
+</extension>
