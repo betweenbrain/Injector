@@ -1,14 +1,14 @@
 <?php defined('_JEXEC') or die;
 
 /**
- * File       joomla_injector.php
+ * File       injector.php
  * Created    3/12/14 3:02 PM
  * Author     Matt Thomas | matt@betweenbrain.com | http://betweenbrain.com
  * Support    https://github.com/betweenbrain/
  * Copyright  Copyright (C) 2014 betweenbrain llc. All Rights Reserved.
- * License    GNU GPL v3 or later
+ * License    GNU GPL v2 or later
  */
-class plgSystemJoomla_injector extends JPlugin
+class plgSystemInjector extends JPlugin
 {
 
 	/**
@@ -101,7 +101,7 @@ class plgSystemJoomla_injector extends JPlugin
 		ob_start();
 
 		if ($template && file_exists(
-				$override = JPATH_BASE . '/templates/' . $this->app->getTemplate() . '/html/plg_joomla_injector/' . $component . '/' . $template . '/default.php')
+				$override = JPATH_BASE . '/templates/' . $this->app->getTemplate() . '/html/plg_injector/' . $component . '/' . $template . '/default.php')
 		)
 		{
 			include $override;
