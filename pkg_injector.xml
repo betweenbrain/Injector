@@ -7,14 +7,14 @@
 	<creationDate>March 12, 2014</creationDate>
 	<description>Joomla Injector</description>
 	<license>GNU/GPL v2 or later</license>
-	<name>Joomla Injector Package</name>
-	<packagename>joomla_injector</packagename>
+	<name>Injector Package</name>
+	<packagename>injector</packagename>
 	<version>0.1-alpha</version>
 
 	<files>
-		<file type="plugin" id="joomla_injector" group="system">Joomla-Injector-content_v0.1-alpha.zip</file>
-		<file type="plugin" id="k2_injector" group="editors-xtd">Joomla-Injector-k2_v0.1-alpha.zip</file>
-		<file type="plugin" id="content_injector" group="editors-xtd">Joomla-Injector-system_v0.1-alpha.zip</file>
+		<file type="plugin" id="injector" group="system">Injector-system_v0.1-alpha.zip</file>
+		<file type="plugin" id="k2_injector" group="editors-xtd">Injector-k2_v0.1-alpha.zip</file>
+		<file type="plugin" id="content_injector" group="editors-xtd">Injector-content_v0.1-alpha.zip</file>
 	</files>
 
 </extension>
