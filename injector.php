@@ -94,6 +94,20 @@ class plgSystemInjector extends JPlugin
 				$item->extra_fields = $K2ModelItem->getItemExtraFields($item->extra_fields, $item);
 
 				break;
+
+			case('zoo'):
+
+				$db    = JFactory::getDbo();
+				$query = $db->getQuery(true);
+				$query
+					->select('*')
+					->from($db->quoteName('#__zoo_item'));
+
+				$db->setQuery($query);
+
+				$item = $db->loadObject();
+
+				break;
 		}
 
 		ob_start();
