@@ -86,11 +86,10 @@ class plgSystemInjector extends JPlugin
 			case('k2'):
 				require_once JPATH_ROOT . '/components/com_k2/models/item.php';
 
-				$K2ModelItem = new K2ModelItem;
-
 				// K2ModelItem->getData() looks for ID parameter
 				JRequest::setVar('id', $id);
 
+				$K2ModelItem        = new K2ModelItem;
 				$item               = $K2ModelItem->getData();
 				$item->extra_fields = $K2ModelItem->getItemExtraFields($item->extra_fields, $item);
 
