@@ -91,10 +91,9 @@ class plgSystemInjector extends JPlugin
 				// K2ModelItem->getData() looks for ID parameter
 				JRequest::setVar('id', $id);
 
-				$item = $K2ModelItem->getData();
+				$item               = $K2ModelItem->getData();
+				$item->extra_fields = $K2ModelItem->getItemExtraFields($item->extra_fields, $item);
 
-				// Attached extra fields to $item
-				$K2ModelItem->getItemExtraFields($item->extra_fields, $item);
 				break;
 		}
 
