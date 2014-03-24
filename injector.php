@@ -97,16 +97,9 @@ class plgSystemInjector extends JPlugin
 
 			case('zoo'):
 
-				$db    = JFactory::getDbo();
-				$query = $db->getQuery(true);
-				$query
-					->select('*')
-					->from($db->quoteName('#__zoo_item'))
-					->where($db->quoteName('id') . ' = ' . $id);
-
-				$db->setQuery($query);
-
-				$item = $db->loadObject();
+				require_once JPATH_ADMINISTRATOR . '/components/com_zoo/config.php';
+				$zoo  = App::getInstance('zoo');
+				$item = $zoo->table->item->get($id);
 
 				break;
 		}
