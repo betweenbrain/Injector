@@ -31,11 +31,15 @@ $params = json_decode($item->params);
 	</dl>
 <?php foreach ($elements as $element)
 {
-	if (!empty($element->file)) : ?>
+	if (property_exists($element, 'file')) : ?>
 		<img src="<?php echo $element->file ?>" />
 	<?php endif;
 
-	if (!empty($element->{'0'})) : ?>
-		<p><?php echo $element->{'0'}->value ?></p>
-	<?php endif;
+	if (property_exists($element, '0'))
+	{
+		array_walk($element, function (&$value)
+		{
+			echo $value->value;
+		});
+	}
 }
