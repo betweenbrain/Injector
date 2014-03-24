@@ -101,7 +101,8 @@ class plgSystemInjector extends JPlugin
 				$query = $db->getQuery(true);
 				$query
 					->select('*')
-					->from($db->quoteName('#__zoo_item'));
+					->from($db->quoteName('#__zoo_item'))
+					->where($db->quoteName('id') . ' = ' . $id);
 
 				$db->setQuery($query);
 
