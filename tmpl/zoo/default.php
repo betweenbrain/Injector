@@ -29,17 +29,8 @@ $params = json_decode($item->params);
 			<span class="icon-eye-open"></span> <?php echo JText::sprintf('COM_CONTENT_ARTICLE_HITS', $item->hits); ?>
 		</dd>
 	</dl>
-<?php foreach ($elements as $element)
+<?php foreach ($item->getElements() as $element)
 {
-	if (property_exists($element, 'file')) : ?>
-		<img src="<?php echo $element->file ?>" />
-	<?php endif;
-
-	if (property_exists($element, '0'))
-	{
-		array_walk($element, function (&$value)
-		{
-			echo $value->value;
-		});
-	}
+	echo $element->render();
 }
+

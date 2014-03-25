@@ -97,7 +97,6 @@ class plgSystemInjector extends JPlugin
 
 			case('zoo'):
 
-				require_once JPATH_ADMINISTRATOR . '/components/com_zoo/config.php';
 				$zoo  = App::getInstance('zoo');
 				$item = $zoo->table->item->get($id);
 
