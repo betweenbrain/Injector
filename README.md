@@ -22,12 +22,12 @@ The path that Injector looks for is `/templates/[current template]/html/plg_inje
 
 For example, when using the shortcode of `{k2-item 42 foo}` Injector will load the template located at `/templates/[current template]/html/plg_injector/k2/foo/default.php`
 
-### Modules
-In the case of injecting a module, the optional template parameter is used for style of module chrome to apply to the module being rendered.
-
 ### Creating a template
 
 Use the provided base templates located at `/plugins/system/injector/tmpl`
+
+## Modules
+In the case of injecting a module, the optional template parameter is used for style of module chrome to apply to the module being rendered.
 
 ## Available Item Properties
 Each item type has a unique set of properties, as defined by its corresponding component. Below is un-exhaustive list of properties available, by item type, when using Injector.
