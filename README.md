@@ -26,6 +26,118 @@ For example, when using the shortcode of `{k2-item 42 foo}` Injector will load t
 
 Use the provided base templates located at `/plugins/system/injector/tmpl`
 
+## Available Item Properties
+Each item type has a unique set of properties, as defined by its corresponding component. Below is un-exhaustive list of properties available, by item type, when using Injector.
+
+Most properties are available via the `$item` object (e.g. `$item->title`).
+
+Some properties are JSON encoded, as noted below, and require you to use `json_decode` to access their nested properties.
+
+### Joomla core content
+*id
+*asset_id
+*title
+*alias
+*introtext
+*fulltext
+*state
+*catid
+*created
+*created_by
+*created_by_alias
+*modified
+*modified_by
+*checked_out
+*checked_out_time
+*publish_up
+*publish_down
+*images [JSON]
+*urls [JSON]
+*attribs [JSON]
+*version
+*ordering
+*metakey
+*metadesc
+*access
+*hits
+*metadata [JSON]
+*featured
+*language
+*xreference
+*category_title
+*category_alias
+*category_access
+*author
+*parent_title
+*parent_id
+*parent_route
+*parent_alias
+*rating
+*rating_count
+*params [JSON]
+
+### K2 Item
+*id
+*title
+*alias
+*catid
+*published
+*introtext
+*fulltext
+*video
+*gallery
+*extra_fields
+*extra_fields_search
+*created
+*created_by
+*created_by_alias
+*checked_out
+*checked_out_time
+*modified
+*modified_by
+*publish_up
+*publish_down
+*trash
+*access
+*ordering
+*featured
+*featured_ordering
+*image_caption
+*image_credits
+*video_caption
+*video_credits
+*hits
+*params [JSON]
+*metadesc
+*metadata
+*metakey
+*plugins
+*language
+*extraFields
+
+### ZOO Item
+*id
+*application_id
+*type
+*name
+*alias
+*created
+*modified
+*modified_by
+*publish_up
+*publish_down
+*priority
+*hits
+*state
+*searchable
+*access
+*created_by
+*created_by_alias
+*params
+*elements
+*app
+
 ## Requirements
 * Joomla 3.2 or later
 * K2 v2.6.8 or later
+* ZOO v3.1.6 or later
