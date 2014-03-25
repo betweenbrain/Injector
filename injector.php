@@ -101,6 +101,26 @@ class plgSystemInjector extends JPlugin
 				$item = $zoo->table->item->get($id);
 
 				break;
+
+			case('module'):
+
+				$query = $this->db->getQuery(true);
+				$query
+					->select($this->db->quoteName(array('module', 'title')))
+					->from($this->db->quoteName('#__modules'))
+					->where($this->db->quoteName('id') . ' = ' . $this->db->quote($id) . ' AND ' . $this->db->quoteName('published') . ' = ' . $this->db->quote('1'));
+
+				$this->db->setQuery($query);
+
+				$result = $this->db->loadObject();
+
+				jimport('joomla.application.module.helper');
+				$module           = JModuleHelper::getModule($result->module, $result->title);
+				$attribs['style'] = $template;
+
+				return JModuleHelper::renderModule($module, $attribs);
+
+				break;
 		}
 
 		ob_start();

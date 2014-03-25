@@ -1,6 +1,6 @@
 # Injector
 
-A simple, multi-purpose set of plugins to easily inject Joomla articles and K2 content items into virtually any place in the Joomla CMS. Beyond the flexibility provided by the core functionality, template overrides are fully supported allowing you to customize how each item is rendered.
+A simple, multi-purpose set of plugins to easily inject Joomla articles, modules, K2 and Zoo items into virtually any place in the Joomla CMS. Beyond the flexibility provided by the core functionality, template overrides are fully supported allowing you to customize how each item is rendered.
 
 ## Usage
 
@@ -21,6 +21,9 @@ The path that Injector looks for is `/templates/[current template]/html/plg_inje
 *  `[template]` the name of your custom template.
 
 For example, when using the shortcode of `{k2-item 42 foo}` Injector will load the template located at `/templates/[current template]/html/plg_injector/k2/foo/default.php`
+
+### Modules
+In the case of injecting a module, the optional template parameter is used for style of module chrome to apply to the module being rendered.
 
 ### Creating a template
 
