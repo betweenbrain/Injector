@@ -50,7 +50,7 @@ class plgSystemInjector extends JPlugin
 
 		$buffer = JResponse::getBody();
 
-		preg_match_all('/{([a-zA-Z0-9_-]*)-item ([0-9]*)\s?([a-zA-Z]*)?}/i', $buffer, $matches, PREG_SET_ORDER);
+		preg_match_all('/{([a-zA-Z0-9_-]*)-item ([0-9]*)\s?([a-zA-Z0-9_\-]*)?}/i', $buffer, $matches, PREG_SET_ORDER);
 
 		foreach ($matches as $match)
 		{
