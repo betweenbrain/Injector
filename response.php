@@ -11,11 +11,10 @@
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_ajax&plugin=injector&format=html&function=AjaxSelectItem&tmpl=component') ?>" method="post" name="adminForm" id="adminForm" class="form-inline">
 	<fieldset class="filter clearfix">
-		<div class="filters pull-left">
+		<div class="btn-toolbar">
 			<?php echo JHtml::_('select.genericlist', $options, 'filter_component', 'class="inputbox" size="1" onchange="document.adminForm.submit( );"', 'value', 'text', $component); ?>
 		</div>
-		<div class="filters pull-right">
-			<?php echo $this->pagination->getListFooter(); ?>
+		<div class="filters pull-left">
 			<?php echo $this->pagination->getLimitBox(); ?>
 		</div>
 	</fieldset>
@@ -28,6 +27,13 @@
 			</th>
 		<?php endforeach ?>
 		</thead>
+		<tfoot>
+		<tr>
+			<td colspan="15">
+				<?php echo $this->pagination->getListFooter(); ?>
+			</td>
+		</tr>
+		</tfoot>
 		<tbody>
 		<?php foreach ($this->items as $i => $item) : ?>
 			<tr class="row<?php echo $i % 2; ?>">
