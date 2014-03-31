@@ -1,7 +1,7 @@
 <?php defined('_JEXEC') or die;
 
 /**
- * File       injector_modal.php
+ * File       injector.php
  * Created    3/27/14 2:27 PM
  * Author     Matt Thomas | matt@betweenbrain.com | http://betweenbrain.com
  * Support    https://github.com/betweenbrain/
@@ -16,7 +16,7 @@ JLoader::import('joomla.html.pagination');
 // Pagniation dependencies
 JHtml::_('behavior.tooltip');
 
-class plgAjaxInjector_modal extends JPlugin
+class plgAjaxInjector extends JPlugin
 {
 
 	/**
@@ -45,7 +45,7 @@ class plgAjaxInjector_modal extends JPlugin
 		$limitstart = $this->app->getUserStateFromRequest($option . '_limitstart', 'limitstart', 0, 'int');
 		$limitstart = ($limit != 0 ? (floor($limitstart / $limit) * $limit) : 0);
 
-		// Supported components, used at plugins/ajax/injector_modal/response.php:15
+		// Supported components, used at plugins/ajax/injector/response.php:15
 		$options = array(
 			'content' => 'Content',
 			'k2'      => 'K2',
@@ -115,7 +115,7 @@ class plgAjaxInjector_modal extends JPlugin
 		// Start output buffering
 		ob_start();
 
-		include JPATH_PLUGINS . '/ajax/injector_modal/response.php';
+		include JPATH_PLUGINS . '/ajax/injector/response.php';
 
 		// Return output buffer
 		return ob_get_clean();

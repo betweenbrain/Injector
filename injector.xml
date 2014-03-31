@@ -5,19 +5,19 @@
 	<authorUrl>http://betweenbrain.com</authorUrl>
 	<copyright>(C) 2014 Matt Thomas. All rights reserved.</copyright>
 	<creationDate>March 12, 2014</creationDate>
-	<description>PLG_AJAX_INJECTOR_MODAL_DESC</description>
+	<description>PLG_AJAX_INJECTOR_DESC</description>
 	<license>GNU/GPL v2 or later</license>
-	<name>plg_ajax_injector_modal</name>
+	<name>plg_ajax_injector</name>
 	<version>0.1</version>
 
 	<files>
-		<filename plugin="injector_modal">injector_modal.php</filename>
+		<filename plugin="injector">injector.php</filename>
 		<filename>response.php</filename>
 	</files>
 
 	<languages folder="languages">
-		<language tag="en-GB">en-GB/en-GB.plg_ajax_injector_modal.ini</language>
-		<language tag="en-GB">en-GB/en-GB.plg_ajax_injector_modal.sys.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_ajax_injector.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_ajax_injector.sys.ini</language>
 	</languages>
 
 </extension>

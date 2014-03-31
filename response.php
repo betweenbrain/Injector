@@ -9,7 +9,7 @@
  * License    GNU GPL v2 or later
  */
 ?>
-<form action="<?php echo JRoute::_('index.php?option=com_ajax&plugin=injector_modal&format=html&function=AjaxSelectItem&tmpl=component') ?>" method="post" name="adminForm" id="adminForm" class="form-inline">
+<form action="<?php echo JRoute::_('index.php?option=com_ajax&plugin=injector&format=html&function=AjaxSelectItem&tmpl=component') ?>" method="post" name="adminForm" id="adminForm" class="form-inline">
 	<fieldset class="filter clearfix">
 		<div class="filters pull-left">
 			<?php echo JHtml::_('select.genericlist', $options, 'filter_component', 'class="inputbox" size="1" onchange="document.adminForm.submit( );"', 'value', 'text', $component); ?>
