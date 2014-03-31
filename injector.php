@@ -35,7 +35,7 @@ class plgAjaxInjector extends JPlugin
 		$this->db  = JFactory::getDbo();
 	}
 
-	function onAjaxInjector_modal()
+	function onAjaxInjector()
 	{
 		// Form controls
 		$option     = $this->app->input->get('plugin');
