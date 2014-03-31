@@ -15,9 +15,8 @@
 		<filename>response.php</filename>
 	</files>
 
-	<languages folder="languages">
-		<language tag="en-GB">en-GB/en-GB.plg_ajax_injector.ini</language>
-		<language tag="en-GB">en-GB/en-GB.plg_ajax_injector.sys.ini</language>
+	<languages>
+		<language tag="en-GB">languages/en-GB/en-GB.plg_ajax_injector.ini</language>
 	</languages>
 
 </extension>
