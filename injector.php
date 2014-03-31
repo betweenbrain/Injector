@@ -2,18 +2,24 @@
 
 /**
  * File       injector.php
- * Created    3/12/14 3:02 PM
+ * Created    3/27/14 2:27 PM
  * Author     Matt Thomas | matt@betweenbrain.com | http://betweenbrain.com
  * Support    https://github.com/betweenbrain/
  * Copyright  Copyright (C) 2014 betweenbrain llc. All Rights Reserved.
  * License    GNU GPL v2 or later
  */
-class plgSystemInjector extends JPlugin
-{
 
+/**
+ * Editor Article buton
+ *
+ * @package     Joomla.Plugin
+ * @subpackage  Editors-xtd.article
+ * @since       1.5
+ */
+class PlgButtonInjector extends JPlugin
+{
 	/**
-	 * Load the language file on instantiation. Note this is only available in Joomla 3.1 and higher.
-	 * If you want to support 3.0 series you must override the constructor
+	 * Load the language file on instantiation.
 	 *
 	 * @var    boolean
 	 * @since  3.1
@@ -21,121 +27,47 @@ class plgSystemInjector extends JPlugin
 	protected $autoloadLanguage = true;
 
 	/**
-	 * Constructor.
+	 * Display the button
 	 *
-	 * @param   object &$subject The object to observe
-	 * @param   array  $config   An optional associative array of configuration settings.
+	 * @param   string $name The name of the button to add
 	 *
-	 * @since   0.1
+	 * @return array A four element array of (article_id, article_title, category_id, object)
 	 */
-	public function __construct(&$subject, $config)
+	public function onDisplay($name)
 	{
-		parent::__construct($subject, $config);
-
-		$this->app = JFactory::getApplication();
-		$this->db  = JFactory::getDbo();
-
-	}
-
-	/**
-	 * @return bool
-	 */
-	function onAfterRender()
-	{
-
-		if ($this->app->isAdmin())
+		/*
+		 * Javascript to insert the link
+		 * View element calls jSelectArticle when an article is clicked
+		 * jSelectArticle creates the link tag, sends it to the editor,
+		 * and closes the select frame.
+		 */
+		$js = "
+		function AjaxSelectItem(id, component)
 		{
-			return true;
-		}
+			var text = '{' + component + '-item ' + id + '}';
+			jInsertEditorText(text);
+			SqueezeBox.close();
+		}";
 
-		$buffer = JResponse::getBody();
+		$doc = JFactory::getDocument();
+		$doc->addScriptDeclaration($js);
 
-		preg_match_all('/{([a-zA-Z0-9_-]*)-item ([0-9]*)\s?([a-zA-Z0-9_\-]*)?}/i', $buffer, $matches, PREG_SET_ORDER);
+		JHtml::_('behavior.modal');
 
-		foreach ($matches as $match)
-		{
-			$buffer = str_replace($match[0], $this->replaceMatch($match[1], $match[2], $match[3]), $buffer);
-		}
+		/*
+		 * Use the built-in element view to select the article.
+		 * Currently uses blank class.
+		 */
+		$link = 'index.php?option=com_ajax&amp;plugin=injector&amp;format=html&amp;function=AjaxSelectItem&amp;component=content&amp;tmpl=component';
 
-		JResponse::setBody($buffer);
+		$button          = new JObject;
+		$button->modal   = true;
+		$button->class   = 'btn';
+		$button->link    = $link;
+		$button->text    = JText::_('PLG_EDITOR_BUTTON_INJECTOR');
+		$button->name    = 'file-add';
+		$button->options = "{handler: 'iframe', size: {x:window.getSize().x-100, y: window.getSize().y-100}}";
 
-		return true;
-
-	}
-
-	/**
-	 * Retrieves and renders the matched ID number given the designated template
-	 *
-	 * @param      $id
-	 * @param null $template
-	 *
-	 * @return string
-	 */
-	private function replaceMatch($component, $id, $template = null)
-	{
-		switch ($component)
-		{
-			case('content'):
-				require_once JPATH_ROOT . '/components/com_content/models/article.php';
-
-				$ContentModelArticle = new ContentModelArticle;
-				$item                = $ContentModelArticle->getItem($id);
-
-				break;
-
-			case('k2'):
-				require_once JPATH_ROOT . '/components/com_k2/models/item.php';
-
-				// K2ModelItem->getData() looks for ID parameter
-				JRequest::setVar('id', $id);
-
-				$K2ModelItem        = new K2ModelItem;
-				$item               = $K2ModelItem->getData();
-				$item->extra_fields = $K2ModelItem->getItemExtraFields($item->extra_fields, $item);
-
-				break;
-
-			case('zoo'):
-
-				$zoo  = App::getInstance('zoo');
-				$item = $zoo->table->item->get($id);
-
-				break;
-
-			case('module'):
-
-				$query = $this->db->getQuery(true);
-				$query
-					->select($this->db->quoteName(array('module', 'title')))
-					->from($this->db->quoteName('#__modules'))
-					->where($this->db->quoteName('id') . ' = ' . $this->db->quote($id) . ' AND ' . $this->db->quoteName('published') . ' = ' . $this->db->quote('1'));
-
-				$this->db->setQuery($query);
-
-				$result = $this->db->loadObject();
-
-				jimport('joomla.application.module.helper');
-				$module           = JModuleHelper::getModule($result->module, $result->title);
-				$attribs['style'] = $template;
-
-				return JModuleHelper::renderModule($module, $attribs);
-
-				break;
-		}
-
-		ob_start();
-
-		if ($template && file_exists(
-				$override = JPATH_BASE . '/templates/' . $this->app->getTemplate() . '/html/plg_injector/' . $component . '/' . $template . '/default.php')
-		)
-		{
-			include $override;
-		}
-		else
-		{
-			include dirname(__FILE__) . '/tmpl/' . $component . '/default.php';
-		}
-
-		return ob_get_clean();
+		return $button;
 	}
 }
