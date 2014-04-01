@@ -12,9 +12,9 @@
 	<version>0.2-alpha</version>
 
 	<files>
-		<file type="plugin" id="injector" group="system">Injector-system_v0.2-alpha.zip</file>
-		<file type="plugin" id="k2_injector" group="editors-xtd">Injector-k2_v0.1-alpha.zip</file>
-		<file type="plugin" id="content_injector" group="editors-xtd">Injector-content_v0.1-alpha.zip</file>
+		<file type="plugin" id="injector" group="ajax">Injector-ajax-v0.2-alpha.zip</file>
+		<file type="plugin" id="injector" group="editors-xtd">Injector-editor-v0.2-alpha.zip</file>
+		<file type="plugin" id="injector" group="system">Injector-system-v0.2-alpha.zip</file>
 	</files>
 
 </extension>
