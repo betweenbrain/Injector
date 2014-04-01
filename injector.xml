@@ -8,6 +8,7 @@
 	<description>PLG_SYSTEM_INJECTOR_DESC</description>
 	<license>GNU/GPL v2 or later</license>
 	<name>plg_injector</name>
+	<scriptfile>script.php</scriptfile>
 	<version>0.2-alpha</version>
 
 	<files>
