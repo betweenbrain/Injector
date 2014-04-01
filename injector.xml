@@ -14,7 +14,7 @@
 		<filename plugin="injector">injector.php</filename>
 	</files>
 
-	<languages folder="languages">
+	<languages folder="language">
 		<language tag="en-GB">en-GB/en-GB.plg_editors-xtd_injector.ini</language>
 		<language tag="en-GB">en-GB/en-GB.plg_editors-xtd_injector.sys.ini</language>
 	</languages>
