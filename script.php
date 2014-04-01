@@ -8,7 +8,7 @@
  * Copyright  Copyright (C) 2014 betweenbrain llc. All Rights Reserved.
  * License    GNU GPL v2 or later
  */
-class PlgSystemInjectorInstallerScript
+class PlgAjaxInjectorInstallerScript
 {
 
 	/**
