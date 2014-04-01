@@ -13,10 +13,7 @@
 	<files>
 		<filename plugin="injector">injector.php</filename>
 		<filename>response.php</filename>
+		<folder>language</folder>
 	</files>
-
-	<languages>
-		<language tag="en-GB">languages/en-GB/en-GB.plg_ajax_injector.ini</language>
-	</languages>
 
 </extension>
