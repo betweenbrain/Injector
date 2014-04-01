@@ -14,10 +14,10 @@ class PlgSystemInjectorInstallerScript
 	/**
 	 * Constructor.
 	 *
-	 * @param   object &$subject The object to observe
-	 * @param   array  $config   An optional associative array of configuration settings.
+	 * @internal param object $subject The object to observe
+	 * @internal param array $config An optional associative array of configuration settings.
 	 *
-	 * @since   0.1
+	 * @since    0.2
 	 */
 	public function __construct()
 	{
@@ -27,54 +27,14 @@ class PlgSystemInjectorInstallerScript
 	}
 
 	/**
-	 * method to install the component
-	 *
-	 * @return void
-	 */
-	function install($parent)
-	{
-		// $parent is the class calling this method
-		$parent->getParent()->setRedirectURL('index.php?option=com_helloworld');
-	}
-
-	/**
-	 * method to uninstall the component
-	 *
-	 * @return void
-	 */
-	function uninstall($parent)
-	{
-		// $parent is the class calling this method
-		echo '<p>' . JText::_('COM_HELLOWORLD_UNINSTALL_TEXT') . '</p>';
-	}
-
-	/**
-	 * method to update the component
-	 *
-	 * @return void
-	 */
-	function update($parent)
-	{
-		// $parent is the class calling this method
-		echo '<p>' . JText::sprintf('COM_HELLOWORLD_UPDATE_TEXT', $parent->get('manifest')->version) . '</p>';
-	}
-
-	/**
-	 * method to run before an install/update/uninstall method
-	 *
-	 * @return void
-	 */
-	function preflight($type, $parent)
-	{
-		// $parent is the class calling this method
-		// $type is the type of change (install, update or discover_install)
-		echo '<p>' . JText::_('COM_HELLOWORLD_PREFLIGHT_' . $type . '_TEXT') . '</p>';
-	}
-
-	/**
 	 * method to run after an install/update/uninstall method
 	 *
+	 * @param $type
+	 * @param $parent
+	 *
 	 * @return void
+	 *
+	 * @since    0.2
 	 */
 	function postflight($type, $parent)
 	{
@@ -86,8 +46,19 @@ class PlgSystemInjectorInstallerScript
 		$this->db->setQuery($query);
 		$results = $this->db->loadObjectList('extension_id');
 
-		echo '<pre>' . print_r($results, true) . '</pre>';
+		foreach ($results as $id => $extension)
+		{
+			$query->update($this->db->quoteName('#__extensions'))
+				->set($this->db->quoteName('enabled') . ' = ' . $this->db->quote('1'))
+				->where($this->db->quoteName('extension_id') . ' = ' . $this->db->quote($id) . ' AND ' . $this->db->quoteName('enabled') . ' = ' . $this->db->quote('0')
+				);
 
+			$this->db->setQuery($query);
+
+			if ($this->db->query() == 1)
+			{
+				JFactory::getApplication()->enqueueMessage(ucfirst($extension->element) . ' ' . ucfirst($extension->folder) . ' plugin has been installed and enabled.', 'notice');
+			}
+		}
 	}
-
 }
