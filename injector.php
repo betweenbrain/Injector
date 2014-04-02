@@ -60,7 +60,7 @@ class plgAjaxInjector extends JPlugin
 		$fields = array(
 			'title',
 			'access',
-			'catid',
+			'category',
 			'created',
 			'id'
 		);
@@ -69,9 +69,22 @@ class plgAjaxInjector extends JPlugin
 		{
 			case('content'):
 				$query
-					->select($this->db->quoteName($fields))
-					->from($this->db->quoteName('#__content'))
-					->where($this->db->quoteName('state') . ' = ' . $this->db->quote('1'));
+					->select($this->db->quoteName(array(
+						'content.title',
+						'content.access',
+						'content.catid',
+						'content.created',
+						'categories.id',
+						'viewlevels.id',
+						'content.id',
+						'categories.extension')))
+					->select($this->db->quoteName('categories.title', 'category'))
+					->select($this->db->quoteName('viewlevels.title', 'viewlevel'))
+					->from($this->db->quoteName('#__content', 'content'))
+					->join('LEFT', $this->db->quoteName('#__categories', 'categories') . ' ON (' . $this->db->quoteName('content.catid') . ' = ' . $this->db->quoteName('categories.id') . ')')
+					->join('LEFT', $this->db->quoteName('#__viewlevels', 'viewlevels') . ' ON (' . $this->db->quoteName('content.access') . ' = ' . $this->db->quoteName('viewlevels.id') . ')')
+					->where($this->db->quoteName('state') . ' = ' . $this->db->quote('1') . ' AND ' . $this->db->quoteName('categories.extension') . ' = ' . $this->db->quote('com_' . $component))
+					->order($this->db->quoteName('content.title') . ' ASC');
 
 				$limitQuery
 					->select('COUNT(*)')
