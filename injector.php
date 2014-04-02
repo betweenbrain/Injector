@@ -96,8 +96,21 @@ class plgAjaxInjector extends JPlugin
 
 			case('k2'):
 				$query
-					->select($this->db->quoteName($fields))
-					->from($this->db->quoteName('#__k2_items'));
+					->select($this->db->quoteName(array(
+						'k2_items.title',
+						'k2_items.access',
+						'k2_items.catid',
+						'k2_items.created',
+						'k2_categories.id',
+						'viewlevels.id',
+						'k2_items.id')))
+					->select($this->db->quoteName('k2_categories.name', 'category'))
+					->select($this->db->quoteName('viewlevels.title', 'viewlevel'))
+					->from($this->db->quoteName('#__k2_items', 'k2_items'))
+					->join('LEFT', $this->db->quoteName('#__k2_categories', 'k2_categories') . ' ON (' . $this->db->quoteName('k2_items.catid') . ' = ' . $this->db->quoteName('k2_categories.id') . ')')
+					->join('LEFT', $this->db->quoteName('#__viewlevels', 'viewlevels') . ' ON (' . $this->db->quoteName('k2_items.access') . ' = ' . $this->db->quoteName('viewlevels.id') . ')')
+					->where($this->db->quoteName('k2_items.trash') . ' = ' . $this->db->quote('0'))
+					->order($this->db->quoteName('k2_items.title') . ' ASC');
 
 				$limitQuery
 					->select('COUNT(*)')
