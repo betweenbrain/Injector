@@ -120,8 +120,21 @@ class plgAjaxInjector extends JPlugin
 
 			case('zoo'):
 				$query
-					->select(array('name as title', 'application_id as catid', 'access', 'created', 'id'))
-					->from($this->db->quoteName('#__zoo_item'));
+					->select($this->db->quoteName(array(
+						'zoo_item.access',
+						'zoo_item.created',
+						'zoo_application.id',
+						'viewlevels.id',
+						'zoo_item.id')))
+					->select($this->db->quoteName('zoo_item.name', 'title'))
+					->select($this->db->quoteName('zoo_item.application_id', 'catid'))
+					->select($this->db->quoteName('zoo_application.name', 'category'))
+					->select($this->db->quoteName('viewlevels.title', 'viewlevel'))
+					->from($this->db->quoteName('#__zoo_item', 'zoo_item'))
+					->join('LEFT', $this->db->quoteName('#__zoo_application', 'zoo_application') . ' ON (' . $this->db->quoteName('zoo_item.application_id') . ' = ' . $this->db->quoteName('zoo_application.id') . ')')
+					->join('LEFT', $this->db->quoteName('#__viewlevels', 'viewlevels') . ' ON (' . $this->db->quoteName('zoo_item.access') . ' = ' . $this->db->quoteName('viewlevels.id') . ')')
+					->where($this->db->quoteName('zoo_item.state') . ' = ' . $this->db->quote('1'))
+					->order($this->db->quoteName('zoo_item.name') . ' ASC');
 
 				$limitQuery
 					->select('COUNT(*)')
