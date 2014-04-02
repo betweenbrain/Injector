@@ -48,9 +48,16 @@ class plgAjaxInjector extends JPlugin
 		// Supported components, used at plugins/ajax/injector/response.php:15
 		$options = array(
 			'content' => 'Content',
-			'k2'      => 'K2',
-			'zoo'     => 'Zoo'
 		);
+
+		if (JComponentHelper::isEnabled('com_k2', true))
+		{
+			$options['k2'] = 'K2';
+		}
+		if (JComponentHelper::isEnabled('com_zoo', true))
+		{
+			$options['zoo'] = 'Zoo';
+		}
 
 		// Create a new query objects
 		$query      = $this->db->getQuery(true);
