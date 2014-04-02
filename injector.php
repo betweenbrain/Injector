@@ -50,11 +50,12 @@ class plgAjaxInjector extends JPlugin
 			'content' => 'Content',
 		);
 
-		if (JComponentHelper::isEnabled('com_k2', true))
+		if (file_exists(JPATH_ADMINISTRATOR . '/components/com_k2/k2.php') && JComponentHelper::isEnabled('com_k2', true))
 		{
 			$options['k2'] = 'K2';
 		}
-		if (JComponentHelper::isEnabled('com_zoo', true))
+
+		if (file_exists(JPATH_ADMINISTRATOR . '/components/com_zoo/zoo.php') && JComponentHelper::isEnabled('com_zoo', true))
 		{
 			$options['zoo'] = 'Zoo';
 		}
