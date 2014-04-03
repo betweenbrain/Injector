@@ -58,7 +58,7 @@ class PlgButtonInjector extends JPlugin
 		 * Use the built-in element view to select the article.
 		 * Currently uses blank class.
 		 */
-		$link = 'index.php?option=com_ajax&amp;plugin=injector&amp;format=html&amp;function=AjaxSelectItem&amp;component=content&amp;tmpl=component';
+		$link = 'index.php?option=com_ajax&amp;plugin=injector&amp;format=html&amp;function=AjaxSelectItem&amp;filter_component=content&amp;tmpl=component';
 
 		$button          = new JObject;
 		$button->modal   = true;
