@@ -48,6 +48,7 @@ class plgAjaxInjector extends JPlugin
 		// Supported components, used at plugins/ajax/injector/response.php:15
 		$options = array(
 			'content' => 'Content',
+			'module'  => 'Module'
 		);
 
 		if (file_exists(JPATH_ADMINISTRATOR . '/components/com_k2/k2.php') && JComponentHelper::isEnabled('com_k2', true))
@@ -147,6 +148,36 @@ class plgAjaxInjector extends JPlugin
 				$limitQuery
 					->select('COUNT(*)')
 					->from($this->db->quoteName('#__zoo_item'));
+
+				break;
+
+			case('module'):
+
+				$fields = array(
+					'title',
+					'access',
+					'type',
+					'published',
+					'id'
+				);
+
+				$query
+					->select($this->db->quoteName(array(
+						'modules.title',
+						'modules.access',
+						'viewlevels.id',
+						'modules.id')))
+					->select($this->db->quoteName('modules.publish_up', 'created'))
+					->select($this->db->quoteName('modules.module', 'category'))
+					->select($this->db->quoteName('viewlevels.title', 'viewlevel'))
+					->from($this->db->quoteName('#__modules', 'modules'))
+					->join('LEFT', $this->db->quoteName('#__viewlevels', 'viewlevels') . ' ON (' . $this->db->quoteName('modules.access') . ' = ' . $this->db->quoteName('viewlevels.id') . ')')
+					->where($this->db->quoteName('published') . ' = ' . $this->db->quote('1'))
+					->order($this->db->quoteName('modules.title') . ' ASC');
+
+				$limitQuery
+					->select('COUNT(*)')
+					->from($this->db->quoteName('#__modules'));
 
 				break;
 		}
