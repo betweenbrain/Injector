@@ -41,16 +41,18 @@
 					<a href="javascript:void(0)" onclick="if (window.parent) window.parent.<?php echo htmlspecialchars($function); ?>('<?php echo $item->id; ?>', '<?php echo $component; ?>');">
 						<?php echo htmlspecialchars($item->title); ?></a>
 				</td>
-				<td class="center">
+				<td>
 					<?php echo htmlspecialchars($item->viewlevel); ?>
 				</td>
-				<td class="center">
+				<td>
 					<?php echo htmlspecialchars($item->category); ?>
 				</td>
-				<td class="center nowrap">
+				<?php if(array_key_exists('created', $item)) : ?>
+				<td>
 					<?php echo JHtml::_('date', $item->created, JText::_('DATE_FORMAT_LC4')); ?>
 				</td>
-				<td class="center">
+				<?php endif ?>
+				<td>
 					<?php echo (int) $item->id; ?>
 				</td>
 			</tr>

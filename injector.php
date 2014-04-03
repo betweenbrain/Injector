@@ -157,7 +157,6 @@ class plgAjaxInjector extends JPlugin
 					'title',
 					'access',
 					'type',
-					'published',
 					'id'
 				);
 
@@ -167,7 +166,6 @@ class plgAjaxInjector extends JPlugin
 						'modules.access',
 						'viewlevels.id',
 						'modules.id')))
-					->select($this->db->quoteName('modules.publish_up', 'created'))
 					->select($this->db->quoteName('modules.module', 'category'))
 					->select($this->db->quoteName('viewlevels.title', 'viewlevel'))
 					->from($this->db->quoteName('#__modules', 'modules'))
