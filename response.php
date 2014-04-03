@@ -42,10 +42,10 @@
 						<?php echo htmlspecialchars($item->title); ?></a>
 				</td>
 				<td class="center">
-					<?php echo htmlspecialchars($item->access); ?>
+					<?php echo htmlspecialchars($item->viewlevel); ?>
 				</td>
 				<td class="center">
-					<?php echo htmlspecialchars($item->catid); ?>
+					<?php echo htmlspecialchars($item->category); ?>
 				</td>
 				<td class="center nowrap">
 					<?php echo JHtml::_('date', $item->created, JText::_('DATE_FORMAT_LC4')); ?>
