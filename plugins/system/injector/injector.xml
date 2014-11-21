@@ -17,4 +17,8 @@
 		<folder>language</folder>
 	</files>
 
+	<updateservers>
+		<server type="extension" name="Menu Wrench Updates">http://betweenbrain.com/updates/injector-system.xml</server>
+	</updateservers>
+
 </extension>

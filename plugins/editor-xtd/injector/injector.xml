@@ -16,4 +16,8 @@
 		<folder>language</folder>
 	</files>
 
+	<updateservers>
+		<server type="extension" name="Menu Wrench Updates">http://betweenbrain.com/updates/injector-editor-xtd.xml</server>
+	</updateservers>
+
 </extension>
