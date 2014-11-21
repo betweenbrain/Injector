@@ -11,33 +11,12 @@ PHP_SAPI === 'cli' or die();
  * License    GNU GPL v2 or later
  */
 
-echo 'Merging develop branch' . PHP_EOL;
-exec("git merge --no-commit develop");
-exec("git checkout --theirs .");
+echo 'Merging develop branch...' . PHP_EOL;
+exec("git merge develop");
 
-echo 'Removing README.md' . PHP_EOL;
-unlink('README.md');
-
-echo 'Removing /plugins' . PHP_EOL;
-recursiveRemoveDirectory(dirname(__FILE__) . '/plugins');
-
-/**
- * Recursively remove files and directories
- *
- * @param $directory
- */
-function recursiveRemoveDirectory($directory)
+echo 'Cleaning up old release files...' . PHP_EOL;
+foreach (glob('{*.zip, *.tar.gz}', GLOB_BRACE) as $filename)
 {
-	foreach (glob("{$directory}/*") as $file)
-	{
-		if (is_dir($file))
-		{
-			recursiveRemoveDirectory($file);
-		}
-		else
-		{
-			unlink($file);
-		}
-	}
-	rmdir($directory);
+	echo 'Removing ' . $filename . PHP_EOL;
+	unlink(dirname(__FILE__) . $filename);
 }
