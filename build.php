@@ -12,7 +12,7 @@ PHP_SAPI === 'cli' or die();
  */
 
 echo 'Merging develop branch' . PHP_EOL;
-exec("git merge develop");
+exec("git merge --no-commit develop");
 
 echo 'Removing README.md' . PHP_EOL;
 unlink('README.md');
