@@ -21,6 +21,11 @@ unlink('README.md');
 echo 'Removing /plugins' . PHP_EOL;
 recursiveRemoveDirectory(dirname(__FILE__) . '/plugins');
 
+/**
+ * Recursively remove files and directories
+ *
+ * @param $directory
+ */
 function recursiveRemoveDirectory($directory)
 {
 	foreach (glob("{$directory}/*") as $file)
