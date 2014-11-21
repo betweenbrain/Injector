@@ -170,7 +170,10 @@ class plgAjaxInjector extends JPlugin
 					->select($this->db->quoteName('viewlevels.title', 'viewlevel'))
 					->from($this->db->quoteName('#__modules', 'modules'))
 					->join('LEFT', $this->db->quoteName('#__viewlevels', 'viewlevels') . ' ON (' . $this->db->quoteName('modules.access') . ' = ' . $this->db->quoteName('viewlevels.id') . ')')
-					->where($this->db->quoteName('published') . ' = ' . $this->db->quote('1'))
+					->where(
+						$this->db->quoteName('published') . ' = ' . $this->db->quote('1') .
+						' AND ' . $this->db->quoteName('client_id') . ' = ' . $this->db->quote('0')
+					)
 					->order($this->db->quoteName('modules.title') . ' ASC');
 
 				$limitQuery
