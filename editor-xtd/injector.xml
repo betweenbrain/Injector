@@ -9,7 +9,7 @@
 	<license>GNU/GPL v2 or later</license>
 	<name>plg_editors-xtd_injector</name>
 	<scriptfile>script.php</scriptfile>
-	<version>0.2</version>
+	<version>1.0.2</version>
 
 	<files>
 		<filename plugin="injector">injector.php</filename>
